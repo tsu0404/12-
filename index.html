@@ -1,103 +1,85 @@
+
+html
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>あなたに降り注ぐ罰ゲームとは！？</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<title>罰ゲーム選択</title>
 <style>
-
-        body {
-
-            background-color: #b22222;
-
-            transition: background-color 0.5s;
-
-        }
-
-        .container {
-
-            text-align: center;
-
-            margin-top: 50px;
-
-            color: white;
-
-        }
-
-        .result {
-
-            font-size: 24px;
-
-            margin-top: 20px;
-
-            transition: transform 0.5s;
-
-        }
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f0f0f0;
+           text-align: center;
+           padding: 50px;
+       }
+       button {
+           padding: 10px 20px;
+           margin: 10px;
+           border: none;
+           cursor: pointer;
+           font-size: 16px;
+       }
+       .message {
+           margin-top: 20px;
+           font-size: 24px;
+           color: #333;
+       }
 </style>
 </head>
 <body>
-<div class="container">
-<h1>あなたに降り注ぐ罰ゲームとは！？</h1>
-<br>
-<label for="colour-select">好きな色を選んでください：</label>
-<select id="colour-select">
-<option value="黒">黒</option>
-<option value="白">白</option>
-<option value="オレンジ">オレンジ</option>
+<h1>罰ゲーム選択ゲーム</h1>
+<p>色を選んで、数字を入力してください！</p>
+<select id="colorSelect">
+<option value="赤">赤</option>
+<option value="青">青</option>
+<option value="緑">緑</option>
+<option value="黄">黄</option>
 </select>
-<br>
-<label for="number-input">好きな数字を選んでください（0、1、2）：</label>
-<input type="number" id="number-input" min="0" max="2">
-<br>
-<button onclick="checkFortune()">地獄をチェック</button>
-<p id="result-output" class="result"></p>
-</div>
+<input type="number" id="numberInput" placeholder="1-5の数字" min="1" max="5">
+<button onclick="getPunishment()">罰ゲームを決定！</button>
+<div class="message" id="resultMessage"></div>
 <script>
-
-        function checkFortune() {
-
-            const color = document.getElementById("colour-select").value;
-
-            const number = document.getElementById("number-input").value;
-
-            const output = document.getElementById("result-output");
-
-            let resultMessage;
-
-            if (color === "黒" && number == 0) {
-
-                resultMessage = "あなたの罰は... ズボンを逆さに履くこと！";
-
-            } else if (color === "白" && number == 1) {
-
-                resultMessage = "あなたの罰は... 冷たい氷水を浴びること！";
-
-            } else if (color === "オレンジ" && number == 2) {
-
-                resultMessage = "あなたの罰は... 一晩中カラオケで「恋するフォーチュンクッキー」を歌うこと！";
-
-            } else {
-
-                resultMessage = "あなたの罰は... 自分の好きな食べ物を逆さに食べること！";
-
-            }
-
-            // 背景色を変える
-
-            document.body.style.backgroundColor = color === "黒" ? "#333" : color === "白" ? "#f0f0f0" : "#ffcc00";
-
-            output.innerHTML = resultMessage;
-
-            output.style.transform = "scale(1.2)";
-
-            setTimeout(() => {
-
-                output.style.transform = "scale(1)";
-
-            }, 500);
-
-        }
+       function getPunishment() {
+           const color = document.getElementById('colorSelect').value;
+           const number = parseInt(document.getElementById('numberInput').value);
+           const punishments = {
+               '赤': [
+                   '1: 大声で叫ぶ',
+                   '2: 片足で立つ',
+                   '3: 変なダンスを踊る',
+                   '4: みんなの前で自己紹介をする',
+                   '5: 他の人の罰ゲームを受ける'
+               ],
+               '青': [
+                   '1: 冷たい水をかぶる',
+                   '2: 5分間静止する',
+                   '3: 逆立ちをする',
+                   '4: みんなにお菓子を配る',
+                   '5: 恥ずかしい歌を歌う'
+               ],
+               '緑': [
+                   '1: 変な顔をする',
+                   '2: みんなの前でモノマネをする',
+                   '3: おかしな声で話す',
+                   '4: 30秒間踊り続ける',
+                   '5: 罰ゲームの内容を考える'
+               ],
+               '黄': [
+                   '1: ジョークを言う',
+                   '2: みんなを笑わせる',
+                   '3: 変わったポーズをキープする',
+                   '4: 5分間無言でいる',
+                   '5: 誰かに面白い話を聞かせる'
+               ]
+           };
+           if (number >= 1 && number <= 5) {
+               const punishment = punishments[color][number - 1];
+               document.getElementById('resultMessage').innerText = `あなたの罰ゲーム: ${punishment}`;
+           } else {
+               document.getElementById('resultMessage').innerText = '1から5の数字を入力してください';
+           }
+       }
 </script>
 </body>
-</html> 
+</html>
