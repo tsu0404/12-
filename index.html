@@ -1,37 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ビューポート設定を追加 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>あなたに降り注ぐ罰ゲームとは！？</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+
+        body {
+
+            background-color: #b22222;
+
+            transition: background-color 0.5s;
+
+        }
+
+        .container {
+
+            text-align: center;
+
+            margin-top: 50px;
+
+            color: white;
+
+        }
+
+        .result {
+
+            font-size: 24px;
+
+            margin-top: 20px;
+
+            transition: transform 0.5s;
+
+        }
+</style>
 </head>
-    
 <body>
-    <div class="container">
-        <body style="background-color:#b22222;">
-        </body>
-  
+<div class="container">
+<h1>あなたに降り注ぐ罰ゲームとは！？</h1>
+<br>
+<label for="colour-select">好きな色を選んでください：</label>
+<select id="colour-select">
+<option value="黒">黒</option>
+<option value="白">白</option>
+<option value="オレンジ">オレンジ</option>
+</select>
+<br>
+<label for="number-input">好きな数字を選んでください（0、1、2）：</label>
+<input type="number" id="number-input" min="0" max="2">
+<br>
+<button onclick="checkFortune()">地獄をチェック</button>
+<p id="result-output" class="result"></p>
+</div>
+<script>
 
-        <br>
-        <label for="colour-select">好きな色を選んでください：</label>
-        <select id="colour-select">
-            <option value="黒">黒</option>
-            <option value="白">白</option>
-            <option value="オレンジ">オレンジ</option>
-        </select>
-        <br>
-        <label for="number-input">好きな数字を選んでください（0、1、2）※半角数値で入力：</label>
-        <input type="number" id="number-input">
-        <br>
-        <button onclick="checkFortune()">地獄をチェック</button>
-        <p id="result-output"></p>
-        
-    
-        
-    </div>    
+        function checkFortune() {
 
-    <script src="app.js"></script>
+            const color = document.getElementById("colour-select").value;
 
+            const number = document.getElementById("number-input").value;
+
+            const output = document.getElementById("result-output");
+
+            let resultMessage;
+
+            if (color === "黒" && number == 0) {
+
+                resultMessage = "あなたの罰は... ズボンを逆さに履くこと！";
+
+            } else if (color === "白" && number == 1) {
+
+                resultMessage = "あなたの罰は... 冷たい氷水を浴びること！";
+
+            } else if (color === "オレンジ" && number == 2) {
+
+                resultMessage = "あなたの罰は... 一晩中カラオケで「恋するフォーチュンクッキー」を歌うこと！";
+
+            } else {
+
+                resultMessage = "あなたの罰は... 自分の好きな食べ物を逆さに食べること！";
+
+            }
+
+            // 背景色を変える
+
+            document.body.style.backgroundColor = color === "黒" ? "#333" : color === "白" ? "#f0f0f0" : "#ffcc00";
+
+            output.innerHTML = resultMessage;
+
+            output.style.transform = "scale(1.2)";
+
+            setTimeout(() => {
+
+                output.style.transform = "scale(1)";
+
+            }, 500);
+
+        }
+</script>
 </body>
-</html>
+</html> 
